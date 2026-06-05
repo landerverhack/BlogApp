@@ -1,0 +1,115 @@
+@page "/chat"
+@rendermode InteractiveServer
+@using System.Collections.Generic
+@layout EmptyLayout
+
+<div class="chat-container">
+    <div class="chat-sidebar">
+        <div class="sidebar-header">
+            <button class="new-chat-btn">
+                <span class="icon">+</span>
+                <span>New chat</span>
+            </button>
+        </div>
+        <div class="conversation-history">
+            <div class="conversation-item active">
+                <span class="conv-title">Web search guide</span>
+                <span class="conv-delete">×</span>
+            </div>
+            <div class="conversation-item">
+                <span class="conv-title">API integration tips</span>
+                <span class="conv-delete">×</span>
+            </div>
+            <div class="conversation-item">
+                <span class="conv-title">Database design</span>
+                <span class="conv-delete">×</span>
+            </div>
+            <div class="conversation-item">
+                <span class="conv-title">React patterns</span>
+                <span class="conv-delete">×</span>
+            </div>
+        </div>
+        <div class="sidebar-footer">
+            <button class="sidebar-btn">
+                <span class="icon">⚙️</span>
+                <span>Settings</span>
+            </button>
+            <button class="sidebar-btn">
+                <span class="icon">ℹ️</span>
+                <span>Help</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="chat-main">
+        <div class="chat-header">
+            <h1>Chat Assistant</h1>
+            <p>How can I help you today?</p>
+        </div>
+
+        <div class="messages-container">
+            <div class="message assistant-message">
+                <div class="avatar">A</div>
+                <div class="message-content">
+                    <p>Hello! I'm your AI assistant. I can help you with coding questions, writing, analysis, and much more. What would you like to work on today?</p>
+                </div>
+            </div>
+
+            <div class="message user-message">
+                <div class="message-content">
+                    <p>Can you help me build a web application?</p>
+                </div>
+                <div class="avatar user-avatar">You</div>
+            </div>
+
+            <div class="message assistant-message">
+                <div class="avatar">A</div>
+                <div class="message-content">
+                    <p>Of course! I'd be happy to help you build a web application. Here are some things we can work on together:</p>
+                    <ul>
+                        <li>Planning architecture and technology stack</li>
+                        <li>Writing code components</li>
+                        <li>Debugging issues</li>
+                        <li>Optimizing performance</li>
+                    </ul>
+                    <p>What type of application are you thinking about? What's the main use case?</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-area">
+            <div class="input-wrapper">
+                <textarea 
+                    placeholder="Message..."
+                    class="chat-input"
+                    @bind="userInput"
+                    @keydown="HandleKeyPress"></textarea>
+                <button class="send-btn" @onclick="SendMessage">
+                    <span>↑</span>
+                </button>
+            </div>
+            <p class="input-footer">This is a sample chat interface built with Blazor.</p>
+        </div>
+    </div>
+</div>
+
+@code {
+    private string userInput = "";
+
+    private void SendMessage()
+    {
+        if (!string.IsNullOrWhiteSpace(userInput))
+        {
+            // Handle message sending
+            userInput = "";
+        }
+    }
+
+    private void HandleKeyPress(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter" && !e.ShiftKey)
+        {
+            SendMessage();
+        }
+    }
+}
