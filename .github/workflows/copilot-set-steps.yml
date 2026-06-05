@@ -1,0 +1,29 @@
+name: "Copilot Setup Steps"
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/copilot-set-steps.yml
+  pull_request:
+    paths:
+      - .github/workflows/copilot-set-steps.yml
+
+jobs:
+  copilot-setup-steps:
+    runs-on: windows-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v5
+
+      - name: Setup .NET 10.x
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.x'
+      
+      - name: Install dependencies
+        run: dotnet restore
