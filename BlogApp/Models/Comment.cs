@@ -3,8 +3,8 @@ namespace BlogApp.Models;
 public record class Comment
 {
     public int Id { get; init; }
-    public string Content { get; init; } = string.Empty;
+    public required string Content { get; init; }
     public int PostId { get; init; }
-    public Post Post { get; init; } = null!;
+    public required Post Post { get; init; }
     public DateTime CreatedAt { get; init; } = DateTime.UtcNow;
 }
